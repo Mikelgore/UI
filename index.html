@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technician Operations Portal</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>Technician Operations Portal</h1>
+      <p class="subtitle">
+        Build a flexible troubleshooting workspace by composing API integrations and dashboard widgets.
+      </p>
+    </header>
+
+    <main class="layout">
+      <aside class="panel control-panel">
+        <section>
+          <h2>Integrations</h2>
+          <form id="integration-form" class="stack-form">
+            <label>
+              Name
+              <input id="integration-name" required placeholder="ServiceNow" />
+            </label>
+            <label>
+              API Base URL
+              <input id="integration-url" required type="url" placeholder="https://api.example.com" />
+            </label>
+            <label>
+              Type
+              <select id="integration-type">
+                <option>ITSM</option>
+                <option>Monitoring</option>
+                <option>Logs</option>
+                <option>Security</option>
+                <option>Custom</option>
+              </select>
+            </label>
+            <label>
+              API Token (optional)
+              <input id="integration-token" type="password" placeholder="Bearer token or API key" />
+            </label>
+            <button type="submit">Add Integration</button>
+          </form>
+          <ul id="integration-list" class="resource-list"></ul>
+        </section>
+
+        <section>
+          <h2>Add Dashboard Widget</h2>
+          <form id="widget-form" class="stack-form">
+            <label>
+              Widget Title
+              <input id="widget-title" required placeholder="Incident Queue" />
+            </label>
+            <label>
+              Data Source
+              <select id="widget-source"></select>
+            </label>
+            <label>
+              HTTP Method
+              <select id="widget-method">
+                <option>GET</option>
+                <option>POST</option>
+              </select>
+            </label>
+            <label>
+              Endpoint Path
+              <input id="widget-endpoint" required placeholder="/incidents?state=open" />
+            </label>
+            <label>
+              Request Body (JSON, optional)
+              <textarea id="widget-body" rows="3" placeholder='{"priority": "high"}'></textarea>
+            </label>
+            <label>
+              Refresh Interval (sec)
+              <input id="widget-refresh" type="number" min="0" value="30" />
+            </label>
+            <button type="submit">Add Widget</button>
+          </form>
+        </section>
+
+        <section>
+          <h2>Portal Config</h2>
+          <div class="actions-row">
+            <button id="export-config" type="button">Export JSON</button>
+            <label class="file-input">
+              Import JSON
+              <input id="import-config" type="file" accept="application/json" />
+            </label>
+          </div>
+        </section>
+      </aside>
+
+      <section class="panel dashboard-panel">
+        <div class="dashboard-header">
+          <h2>Live Dashboard</h2>
+          <button id="clear-widgets" class="danger">Clear Widgets</button>
+        </div>
+        <div id="dashboard-grid" class="dashboard-grid"></div>
+      </section>
+    </main>
+
+    <template id="widget-template">
+      <article class="widget-card">
+        <header>
+          <div>
+            <h3 class="widget-title"></h3>
+            <p class="widget-meta"></p>
+          </div>
+          <div class="actions">
+            <button class="refresh-btn">Refresh</button>
+            <button class="remove-btn danger">Remove</button>
+          </div>
+        </header>
+        <pre class="widget-output"></pre>
+      </article>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
