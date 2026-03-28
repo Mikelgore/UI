@@ -1,0 +1,42 @@
+{
+  "integrations": [
+    {
+      "id": "integration-servicenow-demo",
+      "name": "ServiceNow Demo",
+      "baseUrl": "https://jsonplaceholder.typicode.com",
+      "type": "ITSM",
+      "token": ""
+    },
+    {
+      "id": "integration-splunk-demo",
+      "name": "Splunk Demo",
+      "baseUrl": "https://jsonplaceholder.typicode.com",
+      "type": "Logs",
+      "token": ""
+    }
+  ],
+  "widgets": [
+    {
+      "id": "widget-open-incidents",
+      "title": "Open Incidents",
+      "sourceId": "integration-servicenow-demo",
+      "method": "GET",
+      "endpoint": "/todos?_limit=5",
+      "body": "",
+      "refreshSeconds": 30,
+      "lastData": null,
+      "lastStatus": "Never fetched"
+    },
+    {
+      "id": "widget-recent-log-events",
+      "title": "Recent Log Events",
+      "sourceId": "integration-splunk-demo",
+      "method": "GET",
+      "endpoint": "/posts?_limit=3",
+      "body": "",
+      "refreshSeconds": 60,
+      "lastData": null,
+      "lastStatus": "Never fetched"
+    }
+  ]
+}
